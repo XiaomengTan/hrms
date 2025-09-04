@@ -16,15 +16,15 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("Log")
+@TableName("log")
 public class Log {
-    private String className;
-    private Double costTime;
     private Integer id;
-    private String methodName;
-    private String methodParams;
+    private Long operateUser;
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime operateTime;
-    private Long operateUser;
+    private String className;
+    private String methodName;
+    private String methodParams;
     private String returnValue;
+    private Long costTime;
 }

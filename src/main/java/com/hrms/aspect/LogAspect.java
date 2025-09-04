@@ -1,6 +1,8 @@
 package com.hrms.aspect;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hrms.admin.mapper.LogMapper;
+import com.hrms.domain.common.entity.Log;
 import com.hrms.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,7 @@ public class LogAspect {
     private HttpServletRequest request;
 
     @Autowired
-    private SystemLogMapper systemLogMapper;
+    private LogMapper logMapper;
 
     @Around("@annotation(com.hrms.annotation.Log)")//切入点表达式
     public Object recordTime(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -68,8 +70,8 @@ public class LogAspect {
         Long costTime = end - begin;
 
         //记录操作日志
-        SystemLog systemLog = new SystemLog(null, operateUser, operateTime, className, methodName, methodParams, returnValue, costTime);
-        systemLogMapper.insert(systemLog);
+        Log systemLog = new Log(null, operateUser, operateTime, className, methodName, methodParams, returnValue, costTime);
+        logMapper.insert(systemLog);
         log.info("AOP操作日志：{}", systemLog);
         return result;
     }

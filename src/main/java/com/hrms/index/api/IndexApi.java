@@ -1,7 +1,7 @@
 package com.hrms.index.api;
 
 import com.hrms.domain.common.pojo.Result;
-import com.hrms.domain.user.dto.LoginFormDTO;
+import com.hrms.domain.common.dto.LoginFormDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -21,5 +21,9 @@ public interface IndexApi {
     @Operation(summary = "用户登录接口")
     @PostMapping("/login")
     Result<String> login(@RequestBody @Validated @NotNull LoginFormDTO loginFormDTO);
+
+    @Operation(summary = "测试用-添加用户接口")
+    @PostMapping("/addUser")
+    Result<String> addUser(@RequestBody @Validated @NotNull LoginFormDTO loginFormDTO);
 
 }

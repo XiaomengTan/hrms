@@ -1,7 +1,9 @@
 package com.hrms.filter;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hrms.domain.common.entity.User;
 import com.hrms.domain.common.pojo.Result;
+import com.hrms.user.mapper.UserMapper;
 import com.hrms.utils.JwtUtils;
 import com.hrms.utils.ThreadLocalUtil;
 import io.jsonwebtoken.Jws;

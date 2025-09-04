@@ -2,9 +2,9 @@ spring:
   #配置数据源
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.200.129:3306/easy_chat
+    url: jdbc:mysql://192.168.200.129:3307/hrms
     username: root
-    password: 123456
+    password: 123
   #配置上传和下载文件的最值
   servlet:
     multipart:
@@ -24,8 +24,7 @@ spring:
   data:
     redis:
       host: 192.168.200.129
-      port: 6379
-      password: 123456
+      port: 6380
   security:
     user:
       name: admin
@@ -40,8 +39,8 @@ mybatis:
     map-underscore-to-camel-case: true
 
 mybatis-plus:
-  mapper-locations: classpath:com/easychat/mapper/*.xml  # 适用于 XML 映射文件的路径配置
-  type-aliases-package: com.easychat.pojo  # 实体类的包路径
+  mapper-locations: classpath:com/hrms/mapper/*.xml  # 适用于 XML 映射文件的路径配置
+  type-aliases-package: com.hrms.pojo  # 实体类的包路径
 #阿里云oss配置
 aliyun:
   oss:
