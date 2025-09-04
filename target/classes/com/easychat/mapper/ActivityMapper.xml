@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easychat.user.mapper.ActivityMapper">
+    <select id="selectByUserIdAndFriendId" resultType="com.easychat.domain.common.entity.Activity">
+        <!-- 首先查询 friend_settings 表，确定用户是否有权限查看动态 -->
+        SELECT a.*
+        FROM activity a
+        WHERE a.publisher = #{friendId}
+            AND NOT EXISTS (
+                SELECT 1
+                FROM user_block bl
+                WHERE (bl.user_id = #{friendId} AND bl.block_id = #{userId})
+                    OR (bl.user_id = #{userId} AND bl.block_id = #{friendId})
+            )
+            AND NOT EXISTS (
+                SELECT 1
+                FROM friend_setting fs
+                WHERE fs.user_id = #{friendId}
+                    AND fs.friend_id = #{userId}
+                    AND fs.get_activity = 1
+            )
+            AND (
+                a.access_auth = 1  <!-- 直接允许访问的动态 -->
+                OR (
+                    a.access_auth = 3
+                    AND EXISTS (
+                        SELECT 1
+                        FROM activity_viewer aa
+                        WHERE aa.activity_id = a.id
+                            AND aa.friend_id = #{userId}
+                    )
+                )  <!-- 需要通过 activity_access 表验证权限的动态 -->
+            )
+            AND a.access_auth != 2  <!-- 过滤掉私密状态的动态 -->
+    </select>
+</mapper>

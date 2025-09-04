@@ -1,0 +1,55 @@
+spring:
+  #配置数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.200.129:3306/easy_chat
+    username: root
+    password: 123456
+  #配置上传和下载文件的最值
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  #邮箱相关配置
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 3443053417@qq.com
+    password: nodqxiqgbiqcdajd
+    properties:
+      "mail.transport.protocol": smtp
+      "mail.smtp.auth": true
+      "mail.smtp.starttls.enable": true
+      "mail.debug": true
+  data:
+    redis:
+      host: 192.168.200.129
+      port: 6379
+      password: 123456
+  security:
+    user:
+      name: admin
+      password: admin123456
+
+#mybatis配置
+mybatis:
+  configuration:
+    #配置sql语句执行日志在控制台上输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #配置小驼峰命名和下划线命名之间的映射
+    map-underscore-to-camel-case: true
+
+mybatis-plus:
+  mapper-locations: classpath:com/easychat/mapper/*.xml  # 适用于 XML 映射文件的路径配置
+  type-aliases-package: com.easychat.pojo  # 实体类的包路径
+#阿里云oss配置
+aliyun:
+  oss:
+    endpoint: https://oss-cn-guangzhou.aliyuncs.com
+    accessKeyId: LTAI5tHbg3WyQexRwdbkyrbj
+    accessKeySecret: Y2xiHxRpvi9JsWWJJ0kVy8CvpOjEO1
+    bucketName: web-big-event-0729
+swagger-ui:
+  layout: BaseLayout  # 选择不同的布局
+  tagsSorter: alpha  # 根据标签按字母顺序排序
+  operationsSorter: method  # 根据 HTTP 方法排序

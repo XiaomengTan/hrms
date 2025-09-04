@@ -1,0 +1,38 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>API Documentation</title>-->
+<!--    <script src="https://cdn.redoc.ly/redoc/v2.0.0-rc.56/bundles/redoc.standalone.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<redoc spec-url="http://localhost:8080/v3/api-docs"></redoc> &lt;!&ndash; 指向 OpenAPI JSON 规范 &ndash;&gt;-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ReDoc</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+    <!--
+    ReDoc doesn't change outer page styles
+    -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<!-- 这里填写 swagger 文件访问地址或接口访问地址 -->
+<redoc spec-url='http://localhost:8080/v3/api-docs' untrustedSpec=true></redoc>
+<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+</body>
+</html>

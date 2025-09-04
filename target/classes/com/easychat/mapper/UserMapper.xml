@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easychat.user.mapper.UserMapper">
+    <select id="selectPageByMatchWord" resultType="com.easychat.domain.common.entity.User">
+        SELECT
+            u.id,
+            u.nickname,
+            u.avatar,
+            u.activity_img,
+            u.settings_id,
+            u.signature
+        FROM
+            user u
+        INNER JOIN
+            app_settings s
+        ON
+            u.settings_id = s.id
+        WHERE
+            u.nickname
+                LIKE CONCAT('%', #{matchWord}, '%')
+            AND s.find_by_nickname = 2
+            AND NOT EXISTS (
+                SELECT 1
+                FROM user_block b
+                WHERE
+                    (b.user_id = #{userId} AND b.block_id = u.id)
+                   OR
+                    (b.user_id = u.id AND b.block_id = #{userId})
+            )
+    </select>
+</mapper>
