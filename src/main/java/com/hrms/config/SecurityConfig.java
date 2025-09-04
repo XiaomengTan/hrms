@@ -85,8 +85,8 @@ public class SecurityConfig {
                                 "/webjars/**",
                                 "/api/auth/**" // 登录接口
                         ).permitAll()
-                        .requestMatchers("/user/**").hasAnyAuthority("USER", "ADMIN") // user接口需ROLE_USER
-                        .requestMatchers("/admin/**").hasAuthority("ADMIN") // admin接口需ROLE_ADMIN
+                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") // user接口需ROLE_USER
+                        .requestMatchers("/admin/**").hasRole("ADMIN") // admin接口需ROLE_ADMIN
                         .anyRequest().authenticated() // 其他需认证
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 无session

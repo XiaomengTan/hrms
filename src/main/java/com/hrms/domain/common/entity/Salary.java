@@ -17,12 +17,12 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("salary")
 public class Salary {
-    private Integer cycle;
     private Integer id;
     private Integer jobId;
-    private Double salary;
-    private Double salaryOffset;
+    private Integer workerId;
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime settlementTime;
-    private Integer workerId;
+    private Integer cycle;
+    private Double salaryOffset;
+    private Double salary;
 }

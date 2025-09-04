@@ -22,7 +22,7 @@ public class IndexServiceImpl  implements IndexService {
     @Log
     @Override
     public User login(LoginFormDTO loginFormDTO) {
-        String username = loginFormDTO.getUsername();
+        String username = loginFormDTO.getName();
         String password = loginFormDTO.getPassword();
 
         //1. 获取用户
@@ -47,7 +47,7 @@ public class IndexServiceImpl  implements IndexService {
     public void addUser(LoginFormDTO loginFormDTO) {
         log.info(loginFormDTO.toString());
         User user = new User();
-        user.setName(loginFormDTO.getUsername());
+        user.setName(loginFormDTO.getName());
         user.setPassword(passwordEncoder.encode(loginFormDTO.getPassword()));
         user.setWorker(null);
         userMapper.insert(user);

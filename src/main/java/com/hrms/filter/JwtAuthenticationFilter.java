@@ -56,7 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 ThreadLocalUtil.set(claims);
 
-                Long userId = (Long) claims.get("id");
+                Integer userId = (Integer) claims.get("id");
                 String role = claims.get("role").toString();
 
                 User user = userMapper.selectById(userId);

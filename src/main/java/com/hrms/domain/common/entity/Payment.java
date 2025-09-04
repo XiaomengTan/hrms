@@ -18,13 +18,16 @@ import java.util.Date;
 @TableName("payment")
 public class Payment {
     private Integer id;
+    private Double profit;
+    private Double tax;
+    private Double socialSecurity;
+    private Double water;
+    private Double electricity;
+    private Double salary;
+    private Double outlay;
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime date;
-    private Double electricity;
-    private Double outlay;
-    private Double profit;
-    private Double salary;
-    private Double socialSecurity;
-    private Double tax;
-    private Double water;
+
+
+
 }

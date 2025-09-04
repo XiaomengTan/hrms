@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @TableName("lesson")
 public class Lesson {
-    private String address;
     private Long id;
-    private String info;
     private String name;
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime schedule;
     private String timePlan;
+    private String address;
+    private String info;
 }
