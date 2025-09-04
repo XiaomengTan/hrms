@@ -7,20 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
+/**
+ * Payment
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("group")
-public class Group {
-    private Long id;
-    private Long creatorId;
-    private String name;
-    private Long avatar;
-    private String introContent;
-    private Byte introFile;
-    private Integer totalMbr;
-    private Long operationsId;
+@TableName("payment")
+public class Payment {
+    private Integer id;
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    private LocalDateTime createTime;
+    private LocalDateTime date;
+    private Double electricity;
+    private Double outlay;
+    private Double profit;
+    private Double salary;
+    private Double socialSecurity;
+    private Double tax;
+    private Double water;
 }

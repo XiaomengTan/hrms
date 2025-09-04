@@ -1,7 +1,6 @@
 package com.hrms.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hrms.domain.common.entity.ActAgreeLog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

@@ -1,7 +1,6 @@
 package com.hrms.domain.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +8,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("dialog_category")
-public class DialogCategory {
-    private Long id;
-    private Long userId;
-    @Pattern(regexp = "^.{1,16}$")
+@TableName("job")
+public class Job {
+    private Integer id;
     private String name;
+    private String demand;
+    private Integer type;
+    private Integer salary;
+    private Integer overtimePay;
+    private String introduction;
+    private Integer totalWorker;
 }

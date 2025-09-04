@@ -3,8 +3,6 @@ package com.hrms.index.service.impl;
 import com.hrms.annotation.Log;
 import com.hrms.domain.user.dto.LoginFormDTO;
 import com.hrms.domain.user.dto.RegisterFormDTO;
-import com.hrms.domain.common.entity.AppSettings;
-import com.hrms.domain.common.entity.User;
 import com.hrms.index.service.IndexService;
 import com.hrms.utils.AuthCodeUtils;
 import lombok.extern.slf4j.Slf4j;

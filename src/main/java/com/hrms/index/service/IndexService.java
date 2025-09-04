@@ -2,7 +2,6 @@ package com.hrms.index.service;
 
 import com.hrms.domain.user.dto.LoginFormDTO;
 import com.hrms.domain.user.dto.RegisterFormDTO;
-import com.hrms.domain.common.entity.User;
 
 public interface IndexService {
     /**

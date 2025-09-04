@@ -6,11 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@TableName("ntc_config_member")
-public class NtcConfigMember {
-    private Long id;
-    private Long configId;
-    private Long memberId;
+@NoArgsConstructor
+@TableName("department")
+public class Department {
+    private Integer id;
+    private String name;
+    private Integer subDept;
 }

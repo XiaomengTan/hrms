@@ -1,7 +1,6 @@
 package com.hrms.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hrms.domain.common.entity.SystemLog;
 import com.hrms.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

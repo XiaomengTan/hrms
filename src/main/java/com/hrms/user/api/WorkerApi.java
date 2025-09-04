@@ -1,7 +1,6 @@
 package com.hrms.user.api;
 
 import com.hrms.domain.common.pojo.Result;
-import com.hrms.domain.common.entity.Activity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;

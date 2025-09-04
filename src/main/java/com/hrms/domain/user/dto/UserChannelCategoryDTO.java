@@ -1,6 +1,5 @@
 package com.hrms.domain.user.dto;
 
-import com.hrms.domain.common.entity.UserChannelCategory;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
