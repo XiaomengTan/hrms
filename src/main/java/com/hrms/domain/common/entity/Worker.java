@@ -22,8 +22,8 @@ public class Worker {
     private String certificate;
     private Integer laborStatus;
     private Integer job;
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime onboardingTime;
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime departureTime;
 }

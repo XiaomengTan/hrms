@@ -38,9 +38,13 @@ mybatis:
     #配置小驼峰命名和下划线命名之间的映射
     map-underscore-to-camel-case: true
 
+
 mybatis-plus:
   mapper-locations: classpath:com/hrms/mapper/*.xml  # 适用于 XML 映射文件的路径配置
   type-aliases-package: com.hrms.pojo  # 实体类的包路径
+  global-config:
+    db-config:
+      id-type: auto
 #阿里云oss配置
 aliyun:
   oss:

@@ -14,6 +14,5 @@ public interface JobMapper extends BaseMapper<Job> {
     @Select("select * from job where name = #{name}")
     Job selectByName(String name);
 
-
     IPage<Job> getJobById(Page<Job> page, Integer id, String name);
 }

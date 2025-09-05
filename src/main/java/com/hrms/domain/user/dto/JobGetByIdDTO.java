@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Range;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobByIdDTO {
+public class JobGetByIdDTO {
     private Integer id;
     @Size(min = 2, max = 64)
     private String name;

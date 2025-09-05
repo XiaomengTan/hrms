@@ -1,17 +1,18 @@
 package com.hrms.user.api;
 
+import com.hrms.domain.common.dto.PageDataDTO;
+import com.hrms.domain.common.entity.Job;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
-import com.hrms.domain.user.dto.JobByIdDTO;
+import com.hrms.domain.user.dto.JobGetByIdDTO;
 import com.hrms.domain.user.dto.JobDTO;
+import com.hrms.domain.user.dto.JobReviseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "岗位页面", description = "岗位管理")
 @RequestMapping("/user/job")
@@ -26,7 +27,21 @@ public interface JobApi {
     @DeleteMapping("/delete/{id}")
     Result<String> deleteJob(@PathVariable @NotNull Integer id);
 
+    @Operation(summary = "修改岗位")
+    @PutMapping("/revise")
+    Result<Job> reviseJob(@RequestBody @NotNull @Validated JobReviseDTO jobReviseDTO);
+
     @Operation(summary = "根据id或岗位名称查询岗位")
     @GetMapping("/getById")
-    Result<PageBean> getJobById(@ModelAttribute JobByIdDTO jobByIdDTO);
+    Result<PageBean> getJobById(@ModelAttribute @Validated JobGetByIdDTO jobGetByIdDTO);
+
+    @Operation(summary = "仅分页查询岗位")
+    @GetMapping("/getByPage")
+    Result<PageBean> getJobByPage(@ModelAttribute @NotNull @Validated PageDataDTO pageDataDTO);
+
+    @Operation(summary = "只根据id精确查询")
+    @GetMapping("/getExact/{id}")
+    Result<Job> getJobExact(@PathVariable @NotNull Integer id);
+
+
 }

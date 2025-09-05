@@ -49,7 +49,6 @@ public class IndexServiceImpl  implements IndexService {
         User user = new User();
         user.setName(loginFormDTO.getName());
         user.setPassword(passwordEncoder.encode(loginFormDTO.getPassword()));
-        user.setWorker(null);
         userMapper.insert(user);
     }
 
