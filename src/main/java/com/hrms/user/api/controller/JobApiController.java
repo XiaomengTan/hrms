@@ -22,7 +22,7 @@ public class JobApiController implements JobApi {
 
     @Override
     public Result<String> addJob(JobDTO JobDTO) {
-        log.info("添加岗位：", JobDTO.toString());
+        log.info("添加岗位：{}", JobDTO.toString());
         jobService.addJob(JobDTO);
         log.info("添加成功");
         return Result.success("添加成功");
@@ -30,7 +30,7 @@ public class JobApiController implements JobApi {
 
     @Override
     public Result<String> deleteJob(Integer id) {
-        log.info("删除岗位id为：", id);
+        log.info("删除岗位id为：{}", id);
         jobService.deleteById(id);
         log.info("删除成功");
         return Result.success("添加成功");
@@ -38,7 +38,7 @@ public class JobApiController implements JobApi {
 
     @Override
     public Result<PageBean> getJobById(PageFullDataDTO pageFullDataDTO) {
-        log.info("根据id或名称查询岗位", pageFullDataDTO.toString());
+        log.info("根据id或名称查询岗位：{}", pageFullDataDTO.toString());
         PageBean result = jobService.getJobById(pageFullDataDTO);
         log.info("查询成功");
         return Result.success(result);
@@ -46,7 +46,7 @@ public class JobApiController implements JobApi {
 
     @Override
     public Result<PageBean> getJobByPage(PageDataDTO pageDataDTO) {
-        log.info("分页查询岗位", pageDataDTO.toString());
+        log.info("分页查询岗位：{}", pageDataDTO.toString());
         PageBean result = jobService.getJobByPage(pageDataDTO);
         log.info("分页查询成功");
         return Result.success(result);
@@ -62,7 +62,7 @@ public class JobApiController implements JobApi {
 
     @Override
     public Result<Job> reviseJob(JobReviseDTO jobReviseDTO) {
-        log.info("修改岗位", jobReviseDTO.toString());
+        log.info("修改岗位：{}", jobReviseDTO.toString());
         Job job = jobService.reivseJob(jobReviseDTO);
         log.info("岗位修改成功");
         return Result.success(job);

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -20,8 +21,8 @@ public class Salary {
     private Integer id;
     private Integer jobId;
     private Integer workerId;
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    private LocalDateTime settlementTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate settlementTime;
     private Integer cycle;
     private Double salaryOffset;
     private Double salary;

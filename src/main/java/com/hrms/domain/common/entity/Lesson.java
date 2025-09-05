@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -16,11 +17,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @TableName("lesson")
 public class Lesson {
-    private Long id;
+    private Integer id;
     private String name;
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    private LocalDateTime schedule;
-    private String timePlan;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate schedule;
+    private Integer timePlan;
     private String address;
     private String info;
 }

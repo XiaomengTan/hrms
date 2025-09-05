@@ -24,7 +24,7 @@ public class WorkerApiController implements WorkerApi {
 
     @Override
     public Result<String> addWorker(WorkerDTO workerDTO) {
-        log.info("即将添加员工", workerDTO);
+        log.info("即将添加员工：{}", workerDTO);
         workerService.addWorker(workerDTO);
         log.info("员工添加成功");
 
@@ -33,7 +33,7 @@ public class WorkerApiController implements WorkerApi {
 
     @Override
     public Result<String> deleteWorker(Integer id) {
-        log.info("即将添加员工", id);
+        log.info("即将添加员工：{}", id);
         workerService.deleteById(id);
         log.info("员工删除成功");
         return Result.success("删除员工成功");
@@ -41,7 +41,7 @@ public class WorkerApiController implements WorkerApi {
 
     @Override
     public Result<String> deleteWorker(List<Integer> workerIds) {
-        log.info("即将删除员工", workerIds);
+        log.info("即将删除员工：{}", workerIds);
         workerService.deleteByIds(workerIds);
         log.info("批量删除员工成功");
         return Result.success("批量删除员工成功");
@@ -49,7 +49,7 @@ public class WorkerApiController implements WorkerApi {
 
     @Override
     public Result<Worker> reviseWorker(WorkerReviseDTO workerReviseDTO) {
-        log.info("将修改员工内容为：", workerReviseDTO);
+        log.info("将修改员工内容为：{}", workerReviseDTO);
         Worker worker = workerService.reviseWorker(workerReviseDTO);
         log.info("员工修改成功");
         return Result.success(worker);
@@ -57,7 +57,7 @@ public class WorkerApiController implements WorkerApi {
 
     @Override
     public Result<PageBean> getByPage(PageDataDTO pageDataDTO) {
-        log.info("分页查询员工", pageDataDTO);
+        log.info("分页查询员工：{}", pageDataDTO);
         PageBean result = workerService.getWorkerByPage(pageDataDTO);
         log.info("分页查询成功");
         return Result.success(result);
@@ -65,7 +65,7 @@ public class WorkerApiController implements WorkerApi {
 
     @Override
     public Result<PageBean> getById(PageFullDataDTO pageFullDataDTO) {
-        log.info("按条件模糊分页查询员工", pageFullDataDTO);
+        log.info("按条件模糊分页查询员工：{}", pageFullDataDTO);
         PageBean result = workerService.getWorkerById(pageFullDataDTO);
         log.info("查询成功");
         return Result.success(result);
