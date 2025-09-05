@@ -1,10 +1,10 @@
 package com.hrms.user.api.controller;
 
 import com.hrms.domain.common.dto.PageDataDTO;
+import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Job;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
-import com.hrms.domain.user.dto.JobGetByIdDTO;
 import com.hrms.domain.user.dto.JobDTO;
 import com.hrms.domain.user.dto.JobReviseDTO;
 import com.hrms.user.api.JobApi;
@@ -31,15 +31,15 @@ public class JobApiController implements JobApi {
     @Override
     public Result<String> deleteJob(Integer id) {
         log.info("删除岗位id为：", id);
-        jobService.removeById(id);
+        jobService.deleteById(id);
         log.info("删除成功");
         return Result.success("添加成功");
     }
 
     @Override
-    public Result<PageBean> getJobById(JobGetByIdDTO jobGetByIdDTO) {
-        log.info("根据id或名称查询岗位", jobGetByIdDTO.toString());
-        PageBean result = jobService.getJobById(jobGetByIdDTO);
+    public Result<PageBean> getJobById(PageFullDataDTO pageFullDataDTO) {
+        log.info("根据id或名称查询岗位", pageFullDataDTO.toString());
+        PageBean result = jobService.getJobById(pageFullDataDTO);
         log.info("查询成功");
         return Result.success(result);
     }

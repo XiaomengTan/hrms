@@ -2,9 +2,9 @@ package com.hrms.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hrms.domain.common.dto.PageDataDTO;
+import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Job;
 import com.hrms.domain.common.pojo.PageBean;
-import com.hrms.domain.user.dto.JobGetByIdDTO;
 import com.hrms.domain.user.dto.JobDTO;
 import com.hrms.domain.user.dto.JobReviseDTO;
 
@@ -17,10 +17,10 @@ public interface JobService extends IService<Job> {
 
     /**
      * 根据id和name分页查询岗位信息
-     * @param jobGetByIdDTO
+     * @param pageFullDataDTO
      * @return
      */
-    PageBean getJobById(JobGetByIdDTO jobGetByIdDTO);
+    PageBean getJobById(PageFullDataDTO pageFullDataDTO);
 
     /**
      * 仅分页查询数据，用于岗位页面初始值展示
@@ -34,4 +34,6 @@ public interface JobService extends IService<Job> {
      * @param jobReviseDTO
      */
     Job reivseJob(JobReviseDTO jobReviseDTO);
+
+    void deleteById(Integer id);
 }

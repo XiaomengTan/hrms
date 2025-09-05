@@ -1,20 +1,27 @@
 package com.hrms.domain.common.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 /**
  * Worker
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("worker")
 public class Worker {
     private Integer id;
     private String name;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     private Integer socialSecurity;
     private String rpRecord;
     private String transfer;
@@ -23,7 +30,7 @@ public class Worker {
     private Integer laborStatus;
     private Integer job;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime onboardingTime;
+    private LocalDate onboardingTime;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime departureTime;
+    private LocalDate departureTime;
 }

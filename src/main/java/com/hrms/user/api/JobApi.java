@@ -1,10 +1,10 @@
 package com.hrms.user.api;
 
 import com.hrms.domain.common.dto.PageDataDTO;
+import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Job;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
-import com.hrms.domain.user.dto.JobGetByIdDTO;
 import com.hrms.domain.user.dto.JobDTO;
 import com.hrms.domain.user.dto.JobReviseDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +33,7 @@ public interface JobApi {
 
     @Operation(summary = "根据id或岗位名称查询岗位")
     @GetMapping("/getById")
-    Result<PageBean> getJobById(@ModelAttribute @Validated JobGetByIdDTO jobGetByIdDTO);
+    Result<PageBean> getJobById(@ModelAttribute @Validated PageFullDataDTO pageFullDataDTO);
 
     @Operation(summary = "仅分页查询岗位")
     @GetMapping("/getByPage")

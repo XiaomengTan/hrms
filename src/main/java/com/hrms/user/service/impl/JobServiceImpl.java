@@ -1,26 +1,31 @@
 package com.hrms.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hrms.domain.common.dto.PageDataDTO;
+import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Job;
+import com.hrms.domain.common.entity.Worker;
+import com.hrms.domain.common.enums.Const;
 import com.hrms.domain.common.pojo.PageBean;
-import com.hrms.domain.user.dto.JobGetByIdDTO;
 import com.hrms.domain.user.dto.JobDTO;
 import com.hrms.domain.user.dto.JobReviseDTO;
 import com.hrms.user.mapper.JobMapper;
+import com.hrms.user.mapper.WorkerMapper;
 import com.hrms.user.service.JobService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobService {
 
     @Autowired
     private JobMapper jobMapper;
+    private WorkerMapper workerMapper;
 
     @Override
     public void addJob(JobDTO jobDTO) {
@@ -41,16 +46,16 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     /**
      * 根据id和name分页查询岗位信息
      *
-     * @param jobGetByIdDTO
+     * @param pageFullDataDTO
      * @return
      */
     @Override
-    public PageBean getJobById(JobGetByIdDTO jobGetByIdDTO) {
+    public PageBean getJobById(PageFullDataDTO pageFullDataDTO) {
         //创建分页对象
-        Page<Job> page = new Page<>(jobGetByIdDTO.getPageNum(), jobGetByIdDTO.getPageSize());
+        Page<Job> page = new Page<>(pageFullDataDTO.getPageNum(), pageFullDataDTO.getPageSize());
 
         //提取查询信息
-        IPage<Job> jobIPage = jobMapper.getJobById(page, jobGetByIdDTO.getId(), jobGetByIdDTO.getName());
+        IPage<Job> jobIPage = jobMapper.getJobById(page, pageFullDataDTO.getId(), pageFullDataDTO.getName());
 
         //封装查询结果
         PageBean<Job> jobPageBean = new PageBean<>();
@@ -101,5 +106,18 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
 
         //返回修改结果
         return jobMapper.selectById(newJob.getId());
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        //将所有岗位为当前被删除岗位id的员工的岗位id值设置为0
+        workerMapper.update(new LambdaUpdateWrapper<Worker>()
+                .eq(Worker::getJob, id)
+                .set(Worker::getJob, Const.NO_ASSIGNED_JOB)
+        );
+
+        //删除该岗位
+        jobMapper.deleteById(id);
     }
 }

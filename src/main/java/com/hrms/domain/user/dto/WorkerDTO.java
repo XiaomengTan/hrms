@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -20,9 +20,8 @@ public class WorkerDTO {
     @Size(min = 2, max = 20)
     private String name;
     @NotNull
-    @NotEmpty
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     @NotNull
     @Range(min = 0, max = 1)
     private Integer socialSecurity;
@@ -44,9 +43,8 @@ public class WorkerDTO {
     @NotNull
     private Integer job;
     @NotNull
-    @NotEmpty
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime onboardingTime;
+    private LocalDate onboardingTime;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime departureTime;
+    private LocalDate departureTime;
 }

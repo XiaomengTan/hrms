@@ -1,4 +1,4 @@
-package com.hrms.domain.user.dto;
+package com.hrms.domain.common.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class JobGetByIdDTO {
+@NoArgsConstructor
+public class PageFullDataDTO {
     private Integer id;
-    @Size(min = 2, max = 64)
+    @Size(min = 1, max = 64)
     private String name;
     @NotNull
     @Range(min = 1, max = 999)
