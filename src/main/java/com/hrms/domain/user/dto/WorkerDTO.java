@@ -20,6 +20,12 @@ public class WorkerDTO {
     @Size(min = 2, max = 20)
     private String name;
     @NotNull
+    @Range(min = 1, max = 2)
+    private Integer gender;
+    @NotNull
+    @Range(min = 1, max = 5)
+    private Integer degree;
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     @NotNull

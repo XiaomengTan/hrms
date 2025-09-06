@@ -20,6 +20,8 @@ import java.time.LocalDate;
 public class Worker {
     private Integer id;
     private String name;
+    private String gender;
+    private String degree;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private Integer socialSecurity;

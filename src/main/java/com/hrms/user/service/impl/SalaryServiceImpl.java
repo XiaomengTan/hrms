@@ -60,6 +60,9 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
         Payment payment = paymentMapper.selectByDate(salaryDTO.getSettlementTime());
         //将流水数据在原有的基础之上加上薪资内容
         payment.setSalary(payment.getSalary() + realSalary);
+        //重新计算这一天的总支出
+        Double total = payment.getTax() + payment.getSocialSecurity() + payment.getWater() + payment.getElectricity() + payment.getSalary();
+        payment.setOutlay(total);
         //更新本日薪资数据
         paymentMapper.updateById(payment);
 
@@ -91,6 +94,9 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
         Payment payment = paymentMapper.selectByDate(salary.getSettlementTime());
         //将流水数据在原有的基础之上减去被删除的薪资
         payment.setSalary(payment.getSalary() - salary.getSalary());
+        //重新计算这一天的总支出
+        Double total = payment.getTax() + payment.getSocialSecurity() + payment.getWater() + payment.getElectricity() + payment.getSalary();
+        payment.setOutlay(total);
         //更新本日薪资数据
         paymentMapper.updateById(payment);
         //删除薪资条
@@ -125,6 +131,9 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
             Payment payment = paymentMapper.selectByDate(reviseSalary.getSettlementTime());
             //将流水数据在原有的基础之上减去被删除的薪资，再加上新的薪资数据
             payment.setSalary(payment.getSalary() - reviseSalary.getSalary() + salary.getSalary());
+            //重新计算这一天的总支出
+            Double total = payment.getTax() + payment.getSocialSecurity() + payment.getWater() + payment.getElectricity() + payment.getSalary();
+            payment.setOutlay(total);
             //更新本日薪资数据
             paymentMapper.updateById(payment);
 

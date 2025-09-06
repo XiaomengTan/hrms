@@ -71,6 +71,10 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, Payment> impl
         Payment payment = new Payment();
         BeanUtils.copyProperties(paymentDTO, payment);
 
+        //计算这一天的总支出
+        Double total = payment.getTax() + payment.getSocialSecurity() + payment.getWater() + payment.getElectricity() + payment.getSalary();
+        payment.setOutlay(total);
+
         //修改成功
         paymentMapper.updateById(payment);
     }

@@ -19,6 +19,10 @@ public class WorkerReviseDTO {
     private Integer id;
     @Size(min = 2, max = 20)
     private String name;
+    @Range(min = 1, max = 2)
+    private Integer gender;
+    @Range(min = 1, max = 5)
+    private Integer degree;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     @Range(min = 0, max = 1)
