@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrms.admin.mapper.PaymentMapper">
+    <!-- 使用if标签的动态SQL（最常用的方式） -->
+    <select id="selectPaymentByPage" resultType="com.hrms.domain.common.entity.Payment">
+        SELECT * FROM payment
+        WHERE 1=1
+        <if test="keyWord != null and keyWord != ''">
+            AND (id LIKE CONCAT('%', #{keyWord}, '%')
+            OR profit  LIKE CONCAT('%', #{keyWord}, '%')
+            OR tax  LIKE CONCAT('%', #{keyWord}, '%')
+            OR social_security LIKE CONCAT('%', #{keyWord}, '%')
+            OR water LIKE CONCAT('%', #{keyWord}, '%')
+            OR electricity LIKE CONCAT('%', #{keyWord}, '%')
+            OR salary LIKE CONCAT('%', #{keyWord}, '%')
+            OR outlay LIKE CONCAT('%', #{keyWord}, '%')
+            OR date LIKE CONCAT('%', #{keyWord}, '%')
+            )
+        </if>
+    </select>
+</mapper>

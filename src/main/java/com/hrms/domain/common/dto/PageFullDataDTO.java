@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Range;
 @NoArgsConstructor
 public class PageFullDataDTO {
     private Integer id;
-    @Size(min = 1, max = 64)
+    @Size(max = 64)
     private String name;
     @NotNull
     @Range(min = 1, max = 999)
