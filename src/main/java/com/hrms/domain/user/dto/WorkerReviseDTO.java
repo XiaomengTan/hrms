@@ -34,6 +34,7 @@ public class WorkerReviseDTO {
     @Range(min = 1, max = 3)
     private Integer laborStatus;
     private Integer job;
+    private Integer departmentj;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate onboardingTime;
     @JsonFormat(pattern = "yyyy-MM-dd")

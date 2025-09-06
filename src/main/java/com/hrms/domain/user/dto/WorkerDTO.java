@@ -43,6 +43,8 @@ public class WorkerDTO {
     @NotNull
     private Integer job;
     @NotNull
+    private Integer department;
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate onboardingTime;
     @JsonFormat(pattern = "yyyy-MM-dd")

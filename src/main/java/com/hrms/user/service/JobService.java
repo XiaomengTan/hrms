@@ -35,5 +35,9 @@ public interface JobService extends IService<Job> {
      */
     Job reivseJob(JobReviseDTO jobReviseDTO);
 
+    /**
+     * 删除岗位
+     * @param id
+     */
     void deleteById(Integer id);
 }

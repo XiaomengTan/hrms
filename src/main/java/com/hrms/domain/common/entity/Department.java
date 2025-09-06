@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @TableName("department")
 public class Department {
     private Integer id;
-    private String name;
-    private Integer subDept;
+    private String name;//部门名称
+    private Integer supervisor;//部门主管
+    private Integer uperId;//上级部门id，没有则为0，为根节点
 }
