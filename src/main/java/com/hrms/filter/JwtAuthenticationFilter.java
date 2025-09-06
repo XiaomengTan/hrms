@@ -3,7 +3,7 @@ package com.hrms.filter;
 import com.alibaba.fastjson.JSONObject;
 import com.hrms.domain.common.entity.User;
 import com.hrms.domain.common.pojo.Result;
-import com.hrms.user.mapper.UserMapper;
+import com.hrms.user.mapper.UserDevMapper;
 import com.hrms.utils.JwtUtils;
 import com.hrms.utils.ThreadLocalUtil;
 import io.jsonwebtoken.Jws;
@@ -33,7 +33,7 @@ import java.util.Map;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserDevMapper userDevMapper;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Integer userId = (Integer) claims.get("id");
                 String role = claims.get("role").toString();
 
-                User user = userMapper.selectById(userId);
+                User user = userDevMapper.selectById(userId);
 
 
                 List<GrantedAuthority> authorities = new ArrayList<>();

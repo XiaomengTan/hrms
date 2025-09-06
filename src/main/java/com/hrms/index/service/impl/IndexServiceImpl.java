@@ -4,7 +4,7 @@ import com.hrms.annotation.Log;
 import com.hrms.domain.common.dto.LoginFormDTO;
 import com.hrms.domain.common.entity.User;
 import com.hrms.index.service.IndexService;
-import com.hrms.user.mapper.UserMapper;
+import com.hrms.user.mapper.UserDevMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class IndexServiceImpl  implements IndexService {
     @Autowired
-    private UserMapper userMapper;
+    private UserDevMapper userDevMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -26,7 +26,7 @@ public class IndexServiceImpl  implements IndexService {
         String password = loginFormDTO.getPassword();
 
         //1. 获取用户
-        User user = userMapper.getByUserName(username);
+        User user = userDevMapper.getByUserName(username);
         if (user == null) {
             throw new RuntimeException("不存在该用户");
         }
@@ -49,7 +49,7 @@ public class IndexServiceImpl  implements IndexService {
         User user = new User();
         user.setName(loginFormDTO.getName());
         user.setPassword(passwordEncoder.encode(loginFormDTO.getPassword()));
-        userMapper.insert(user);
+        userDevMapper.insert(user);
     }
 
     /*

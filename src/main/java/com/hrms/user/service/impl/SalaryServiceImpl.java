@@ -3,6 +3,7 @@ package com.hrms.user.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hrms.annotation.Log;
 import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Job;
@@ -34,6 +35,7 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
      * @param salaryDTO
      * @return
      */
+    @Log
     @Override
     @Transactional
     public Salary addSalary(SalaryDTO salaryDTO) {
@@ -70,6 +72,7 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
      *
      * @param id
      */
+    @Log
     @Override
     @Transactional
     public void deleteById(Integer id) {
@@ -84,6 +87,7 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
      *
      * @param salaryReviseDTO
      */
+    @Log
     @Override
     @Transactional
     public void reviseSalary(SalaryReviseDTO salaryReviseDTO) {
@@ -117,6 +121,7 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
      * @param pageDataDTO
      * @return
      */
+    @Log
     @Override
     public PageBean getSalaryByPage(PageDataDTO pageDataDTO) {
         Page<Salary> salaryPage = new Page<>(pageDataDTO.getPageNum(), pageDataDTO.getPageSize());
@@ -135,6 +140,7 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
      * @param pageFullDataDTO
      * @return
      */
+    @Log
     @Override
     public PageBean getSalaryById(PageFullDataDTO pageFullDataDTO) {
         Page<Salary> salaryPage = new Page<>(pageFullDataDTO.getPageNum(), pageFullDataDTO.getPageSize());

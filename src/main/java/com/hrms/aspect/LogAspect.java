@@ -34,15 +34,15 @@ public class LogAspect {
         //用于记录用户的操作日志
         //获取用户id
         Map<String, Object> claims = ThreadLocalUtil.get();
-        Long operateUser;
+        Integer operateUser;
         if (Objects.isNull(claims)) {
-            operateUser = 0L;
+            operateUser = 0;
         } else {
-            operateUser = (Long) claims.get("id");
+            operateUser = (Integer) claims.get("id");
         }
 
         //将不含有jwt的增改操作的操作人设置为0进行记录，如注册和修改密码等
-        operateUser = Objects.requireNonNullElse(operateUser, 0L);
+        operateUser = Objects.requireNonNullElse(operateUser, 0);
         //操作时间
         LocalDateTime operateTime = LocalDateTime.now();
 

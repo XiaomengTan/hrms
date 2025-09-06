@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrms.admin.mapper.LogMapper">
+    <!-- 使用if标签的动态SQL（最常用的方式） -->
+    <select id="getOptionalByPage" resultType="com.hrms.domain.common.entity.Log">
+        SELECT * FROM log
+        WHERE 1=1
+        <if test="keyWord != null and keyWord != ''">
+            AND (operate_user LIKE CONCAT('%', #{keyWord}, '%')
+                OR operate_time  LIKE CONCAT('%', #{keyWord}, '%')
+                OR class_name  LIKE CONCAT('%', #{keyWord}, '%')
+                OR method_params LIKE CONCAT('%', #{keyWord}, '%')
+                OR return_value LIKE CONCAT('%', #{keyWord}, '%')
+                OR cost_time LIKE CONCAT('%', #{keyWord}, '%')
+                )
+        </if>
+    </select>
+</mapper>

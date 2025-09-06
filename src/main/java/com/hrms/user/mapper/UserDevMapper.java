@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserDevMapper extends BaseMapper<User> {
     @Select("select * from user where name = #{username}")
     User getByUserName(String username);
 }

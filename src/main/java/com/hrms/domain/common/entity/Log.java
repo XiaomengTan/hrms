@@ -19,7 +19,7 @@ import java.util.Date;
 @TableName("log")
 public class Log {
     private Integer id;
-    private Long operateUser;
+    private Integer operateUser;
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime operateTime;
     private String className;
