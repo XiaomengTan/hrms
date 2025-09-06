@@ -3,10 +3,12 @@ package com.hrms.user.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hrms.admin.mapper.PaymentMapper;
 import com.hrms.annotation.Log;
 import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Job;
+import com.hrms.domain.common.entity.Payment;
 import com.hrms.domain.common.entity.Salary;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.SalaryDTO;
@@ -28,6 +30,9 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
 
     @Autowired
     private JobMapper jobMapper;
+
+    @Autowired
+    private PaymentMapper paymentMapper;
 
     /**
      * 添加薪资条
@@ -51,7 +56,12 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
         //加上薪资的变化
         Double realSalary = baseSalary + salaryDTO.getSalaryOffset();
 
-        //teleport还需要在此修改本日的支出情形
+        //根据薪资条的创建时间为薪资的发放时间，以此查询今日的流水数据
+        Payment payment = paymentMapper.selectByDate(salaryDTO.getSettlementTime());
+        //将流水数据在原有的基础之上加上薪资内容
+        payment.setSalary(payment.getSalary() + realSalary);
+        //更新本日薪资数据
+        paymentMapper.updateById(payment);
 
         //属性拷贝
         Salary salary = new Salary();
@@ -76,8 +86,13 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
     @Override
     @Transactional
     public void deleteById(Integer id) {
-        //teleport删除前，首先需要复原今日的流水
-
+        Salary salary = salaryMapper.selectById(id);
+        //由于该薪资条被修改，所以还需要从流水数据中改为新的薪资数据
+        Payment payment = paymentMapper.selectByDate(salary.getSettlementTime());
+        //将流水数据在原有的基础之上减去被删除的薪资
+        payment.setSalary(payment.getSalary() - salary.getSalary());
+        //更新本日薪资数据
+        paymentMapper.updateById(payment);
         //删除薪资条
         salaryMapper.deleteById(id);
     }
@@ -105,6 +120,14 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
             Integer jobSalary = job.getSalary();
             //将工资条的总工资设置为新值
             salary.setSalary(jobSalary + salaryOffset);
+
+            //由于该薪资条被修改，所以还需要从流水数据中改为新的薪资数据
+            Payment payment = paymentMapper.selectByDate(reviseSalary.getSettlementTime());
+            //将流水数据在原有的基础之上减去被删除的薪资，再加上新的薪资数据
+            payment.setSalary(payment.getSalary() - reviseSalary.getSalary() + salary.getSalary());
+            //更新本日薪资数据
+            paymentMapper.updateById(payment);
+
         }
         //属性拷贝
         BeanUtils.copyProperties(salaryReviseDTO, salary);
@@ -112,7 +135,6 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
         salary.setSettlementTime(LocalDate.now());
         //存入数据库中
         salaryMapper.updateById(salary);
-        //teleport还需更改日流水，暂略
     }
 
     /**
