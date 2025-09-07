@@ -21,7 +21,7 @@
         <if test="id != null and id != ''">
             AND s.id LIKE CONCAT('%', #{id}, '%')
         </if>
-        <if test="name != null and name != ''">-->
+        <if test="name != null and name != ''">
             AND w.name LIKE CONCAT('%', #{name}, '%')
         </if>
         AND 1 = 1

@@ -24,7 +24,7 @@ public interface SalaryApi {
     Result<Salary> addSalary(@RequestBody @Validated SalaryDTO salaryDTO);
 
     @Operation(summary = "删除薪资条")
-    @DeleteMapping("/delete/{}")
+    @DeleteMapping("/delete/{id}")
     Result deleteSalary(@PathVariable @NotNull Integer id);
 
     @Operation(summary = "修改薪资条")

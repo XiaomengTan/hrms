@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public interface PaymentApi {
 
     @Operation(summary = "定时任务测试")
-//    @PostMapping("/add")仅用于测试
+//    @PostMapping("/add")//仅用于测试
     void addPaymentForm();
 
     @Operation(summary = "有关键词时模糊匹配全列，没有关键词时直接分页搜索全部")
