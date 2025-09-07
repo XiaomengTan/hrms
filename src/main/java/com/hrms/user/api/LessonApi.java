@@ -13,6 +13,8 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "培训页面", description = "培训管理")
 @RequestMapping("/user/lesson")
 @Validated
@@ -37,4 +39,9 @@ public interface LessonApi {
     @Operation(summary = "根据id分页模糊搜索课程信息")
     @GetMapping("/getById")
     Result<PageBean> getById(@ModelAttribute @Validated @NotNull PageFullDataDTO pageFullDataDTO);
+
+    @Operation(summary = "获取所有培训课程")
+    @GetMapping("/getAll")
+    Result<List<Lesson>> getAll();
+
 }

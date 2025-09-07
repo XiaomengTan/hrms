@@ -1,7 +1,9 @@
 package com.hrms.user.api;
 
+import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Trainee;
+import com.hrms.domain.common.entity.Worker;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
 import com.hrms.domain.user.dto.TraineeDTO;
@@ -29,4 +31,18 @@ public interface TraineeApi {
     @Operation(summary = "分页查询学员")
     @GetMapping("/getByPage")
     Result<PageBean> getTraineesByPage(@ModelAttribute @NotNull PageFullDataDTO pageFullDataDTO);
+
+    @Operation(summary = "查询不在某课程的学员名单")
+    @GetMapping("/notInLesson/{id}")
+    Result<List<Worker>> getNotInLessonList(@PathVariable @NotNull Integer id);
+
+    @Operation(summary = "查询在某课程的学员名单")
+    @GetMapping("/inLesson/{id}")
+    Result<List<Worker>> getInLessonList(@PathVariable @NotNull Integer id);
+
+    @Operation(summary = "查询学员-课程映射表")
+    @GetMapping("/getTraineeByPage")
+    Result<PageBean> getAllTrainees(@ModelAttribute @NotNull PageDataDTO pageDataDTO);
+
+
 }

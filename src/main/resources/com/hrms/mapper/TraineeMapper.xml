@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hrms.user.mapper.WorkerMapper">
+<mapper namespace="com.hrms.user.mapper.TraineeMapper">
     <!-- 使用if标签的动态SQL（最常用的方式） -->
-    <select id="getWorkerById" resultType="com.hrms.domain.common.entity.Worker">
-        SELECT * FROM worker
-        WHERE 1=1
-        <if test="id != null and id != ''">
-            AND id LIKE CONCAT('%', #{id}, '%')
-        </if>
-        <if test="name != null and name != ''">
-            AND name LIKE CONCAT('%', #{name}, '%')
-        </if>
+    <select id="getTraineeById" resultType="com.hrms.domain.common.entity.Trainee">
+    SELECT t.*
+    FROM trainee t
+        <where>
+            <if test="name != null and name != ''">
+                AND EXISTS (
+                SELECT 1
+                FROM worker w
+                WHERE w.id = t.worker_id
+                AND w.name LIKE CONCAT('%', #{name}, '%')
+                )
+            </if>
+            <if test="id != null and id != ''">
+                AND t.les_id = #{id}
+            </if>
+        </where>
     </select>
 </mapper>

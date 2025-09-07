@@ -129,4 +129,13 @@ public class LessonServiceImpl extends ServiceImpl<LessonMapper, Lesson> impleme
         lessonPageBean.setItems(lessonIPage.getRecords());
         return lessonPageBean;
     }
+
+    /**
+     * 查询所有课程
+     */
+    @Override
+    public List<Lesson> getAllLesson() {
+        List<Lesson> lessons = lessonMapper.selectList(null);
+        return lessons;
+    }
 }

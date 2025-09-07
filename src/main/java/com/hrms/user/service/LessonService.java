@@ -8,6 +8,8 @@ import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.LessonDTO;
 import com.hrms.domain.user.dto.LessonReviseDTO;
 
+import java.util.List;
+
 public interface LessonService extends IService<Lesson> {
     /**
      * 添加课程
@@ -41,4 +43,10 @@ public interface LessonService extends IService<Lesson> {
      * @return
      */
     PageBean getLessonById(PageFullDataDTO pageFullDataDTO);
+
+    /**
+     * 查询所有课程
+     */
+    List<Lesson> getAllLesson();
+
 }

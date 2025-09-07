@@ -1,5 +1,7 @@
 package com.hrms.domain.common.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -20,8 +22,8 @@ import java.time.LocalDate;
 public class Worker {
     private Integer id;
     private String name;
-    private String gender;
-    private String degree;
+    private Integer gender;
+    private Integer degree;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private Integer socialSecurity;
@@ -34,6 +36,7 @@ public class Worker {
     private Integer department;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate onboardingTime;
+    @TableField(insertStrategy = FieldStrategy.IGNORED, updateStrategy = FieldStrategy.IGNORED)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureTime;
 }

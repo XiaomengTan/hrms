@@ -3,7 +3,11 @@ package com.hrms.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hrms.domain.admin.dto.DepartmentDTO;
 import com.hrms.domain.admin.dto.DepartmentReviseDTO;
+import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.entity.Department;
+import com.hrms.domain.common.pojo.PageBean;
+
+import java.util.List;
 
 public interface DepartmentService extends IService<Department> {
 
@@ -24,4 +28,11 @@ public interface DepartmentService extends IService<Department> {
      * @param id
      */
     void deleteDepartment(Integer id);
+
+    /**
+     *
+     * 分页查询部门列表
+     * @return
+     */
+    List<Department> getAllDept();
 }

@@ -14,6 +14,8 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "岗位页面", description = "岗位管理")
 @RequestMapping("/user/job")
 @Validated
@@ -42,6 +44,14 @@ public interface JobApi {
     @Operation(summary = "只根据id精确查询")
     @GetMapping("/getExact/{id}")
     Result<Job> getJobExact(@PathVariable @NotNull Integer id);
+
+    @Operation(summary = "查询所有岗位")
+    @GetMapping("/getAll")
+    Result<List<Job>> getAllJob();
+
+    @Operation(summary = "更新岗位总人数")
+    @PutMapping("/totalInit")
+    Result totalInit();
 
 
 }

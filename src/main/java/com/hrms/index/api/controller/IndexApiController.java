@@ -50,7 +50,7 @@ public class IndexApiController implements IndexApi {
             claims.put("role", role);
             String jwt = JwtUtils.generateJwt(claims);
             //将token存储到redis中
-            stringRedisTemplate.opsForValue().set(jwt, jwt, 1, TimeUnit.HOURS);
+            stringRedisTemplate.opsForValue().set(jwt, jwt, 100, TimeUnit.HOURS);
             return Result.success(jwt, "登录成功");
         } else {
             return Result.error("用户不存在");

@@ -1,14 +1,17 @@
 package com.hrms.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hrms.admin.mapper.DepartmentMapper;
+import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
-import com.hrms.domain.common.entity.Lesson;
-import com.hrms.domain.common.entity.Trainee;
-import com.hrms.domain.common.entity.Worker;
+import com.hrms.domain.common.entity.*;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.TraineeDTO;
+import com.hrms.domain.user.vo.TraineeVO;
+import com.hrms.user.mapper.JobMapper;
 import com.hrms.user.mapper.LessonMapper;
 import com.hrms.user.mapper.TraineeMapper;
 import com.hrms.user.mapper.WorkerMapper;
@@ -19,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TraineeServiceImpl extends ServiceImpl<TraineeMapper, Trainee> implements TraineeService {
@@ -31,6 +35,10 @@ public class TraineeServiceImpl extends ServiceImpl<TraineeMapper, Trainee> impl
 
     @Autowired
     private WorkerMapper workerMapper;
+    @Autowired
+    private DepartmentMapper departmentMapper;
+    @Autowired
+    private JobMapper jobMapper;
 
 
     /**
@@ -49,6 +57,9 @@ public class TraineeServiceImpl extends ServiceImpl<TraineeMapper, Trainee> impl
         if (lesson == null) {
             throw new RuntimeException("课程不存在");
         }
+        //删除旧的学员信息内容
+        traineeMapper.delete(new LambdaQueryWrapper<Trainee>()
+                .eq(Trainee::getLesId, lesId));
         //将列表加入
         List<Trainee> trainees = new ArrayList<>();
         for(Integer workerId : workerIds) {
@@ -78,20 +89,92 @@ public class TraineeServiceImpl extends ServiceImpl<TraineeMapper, Trainee> impl
         //创建分页对象
         Page<Trainee> page = new Page<>(pageFullDataDTO.getPageNum(), pageFullDataDTO.getPageSize());
         //封装查询结果
-        IPage<Trainee> traineeIPage = traineeMapper.getTraineeByPage(page, pageFullDataDTO.getId());
+        IPage<Trainee> traineeIPage = traineeMapper.getTraineeById(page, pageFullDataDTO.getId(), pageFullDataDTO.getName());
         //封装查询结果
-        PageBean<Worker> traineePageBean = new PageBean<>();
+        PageBean<TraineeVO> traineePageBean = new PageBean<>();
         traineePageBean.setTotal(traineeIPage.getTotal());
-        //注意，这里查出来的还是worker的id，还需要遍历查询worker表才能得到学员的信息
+
+        //封装视图对象
+        List<TraineeVO> traineeVOS = new ArrayList<>();
+        //遍历查询结果
         List<Trainee> records = traineeIPage.getRecords();
-        List<Worker> workers = new ArrayList<>();
-        for (Trainee trainee : records) {
-            Worker worker = workerMapper.selectById(trainee.getWorkerId());
-            if (worker != null) {
-                workers.add(worker);
-            }
+        for(Trainee trainee : records) {
+            TraineeVO traineeVO = new TraineeVO();
+            traineeVO.setId(trainee.getId());
+            Integer workerId = trainee.getWorkerId();
+            Integer lesId = trainee.getLesId();
+            Worker worker = workerMapper.selectById(workerId);
+            traineeVO.setName(worker.getName());
+            Job job = jobMapper.selectById(worker.getJob());
+            Department department = departmentMapper.selectById(worker.getDepartment());
+            traineeVO.setJob(job.getName());
+            traineeVO.setDept(department.getName());
+            Lesson lesson = lessonMapper.selectById(lesId);
+            traineeVO.setLesName(lesson.getName());
+            traineeVOS.add(traineeVO);
         }
-        traineePageBean.setItems(workers);
+        traineePageBean.setItems(traineeVOS);
         return traineePageBean;
+    }
+
+    /**
+     * 分页查询学员的映射关系表
+     *
+     * @param pageDataDTO
+     * @return
+     */
+    @Override
+    public PageBean getAllByPage(PageDataDTO pageDataDTO) {
+        //创建分页对象
+        Page<Trainee> page = new Page<>(pageDataDTO.getPageNum(), pageDataDTO.getPageSize());
+        //封装查询结果
+        IPage<Trainee> traineeIPage = traineeMapper.selectPage(page, null);
+        //封装查询结果
+        PageBean<Trainee> traineePageBean = new PageBean<>();
+        traineePageBean.setTotal(traineeIPage.getTotal());
+        traineePageBean.setItems(traineeIPage.getRecords());
+        return traineePageBean;
+    }
+
+    /**
+     * 查询所有不在某课程列表的学员名单
+     *
+     * @param lessonId
+     * @return
+     */
+    @Override
+    public List<Worker> getNotInLessonList(Integer lessonId) {
+        //查询课程的学员名单
+        List<Integer> trainees = traineeMapper.selectObjs(
+                        new LambdaQueryWrapper<Trainee>()
+                                .select(Trainee::getWorkerId) // 明确指定查询字段
+                                .eq(Trainee::getLesId, lessonId)
+                ).stream()
+                .map(obj -> (Integer) obj) // 将Object转换为Integer
+                .collect(Collectors.toList());
+        List<Worker> workers = workerMapper.selectList(new LambdaQueryWrapper<Worker>()
+                .notIn(Worker::getId, trainees));
+        return workers;
+    }
+
+    /**
+     * 查询所有在某课程列表的学员名单
+     *
+     * @param lessonId
+     * @return
+     */
+    @Override
+    public List<Worker> getInLessonList(Integer lessonId) {
+        //查询课程的学员名单
+        List<Integer> trainees = traineeMapper.selectObjs(
+                        new LambdaQueryWrapper<Trainee>()
+                                .select(Trainee::getWorkerId) // 明确指定查询字段
+                                .eq(Trainee::getLesId, lessonId)
+                ).stream()
+                .map(obj -> (Integer) obj) // 将Object转换为Integer
+                .collect(Collectors.toList());
+        List<Worker> workers = workerMapper.selectList(new LambdaQueryWrapper<Worker>()
+                .in(Worker::getId, trainees));
+        return workers;
     }
 }

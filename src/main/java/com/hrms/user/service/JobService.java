@@ -8,6 +8,8 @@ import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.JobDTO;
 import com.hrms.domain.user.dto.JobReviseDTO;
 
+import java.util.List;
+
 public interface JobService extends IService<Job> {
     /**
      * 添加岗位
@@ -40,4 +42,16 @@ public interface JobService extends IService<Job> {
      * @param id
      */
     void deleteById(Integer id);
+
+    /**
+     * 查询所有岗位
+     * @return
+     */
+    List<Job> getAllJob();
+
+    /**
+     * 更新岗位在职总人数
+     */
+    void totalInit();
+
 }

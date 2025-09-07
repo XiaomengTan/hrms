@@ -1,5 +1,6 @@
 package com.hrms.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -20,11 +21,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobService {
 
     @Autowired
     private JobMapper jobMapper;
+
+    @Autowired
     private WorkerMapper workerMapper;
 
     @Override
@@ -119,5 +124,39 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
 
         //删除该岗位
         jobMapper.deleteById(id);
+    }
+
+    /**
+     * 查询所有岗位
+     *
+     * @return
+     */
+    @Override
+    public List<Job> getAllJob() {
+        List<Job> jobs = jobMapper.selectList(null);
+        return jobs;
+    }
+
+    /**
+     * 更新岗位在职总人数
+     */
+    @Override
+    @Transactional
+    public void totalInit() {
+        //获取所有岗位的id
+        List<Job> jobs = jobMapper.selectList(null);
+
+        //遍历统计
+        for(Job job : jobs) {
+            //根据id查询worker
+            List<Worker> workers = workerMapper.selectList(new LambdaQueryWrapper<Worker>()
+                    .eq(Worker::getJob, job.getId())
+                    //只统计任职状态的员工
+                    .ne(Worker::getWorkStatus, Const.NO_ASSIGNED_JOB));
+            Integer total = workers.size();
+            job.setTotalWorker(total);
+        }
+        //更新数据
+        jobMapper.updateById(jobs);
     }
 }

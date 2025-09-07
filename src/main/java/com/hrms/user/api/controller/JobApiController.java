@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 public class JobApiController implements JobApi {
@@ -58,6 +60,22 @@ public class JobApiController implements JobApi {
         Job byId = jobService.getById(id);
         log.info("查询成功");
         return Result.success(byId);
+    }
+
+    @Override
+    public Result<List<Job>> getAllJob() {
+        log.info("即将查询所有岗位");
+        List<Job> jobs = jobService.getAllJob();
+        log.info("查询成功");
+        return Result.success(jobs);
+    }
+
+    @Override
+    public Result totalInit() {
+        log.info("更新岗位总人数");
+        jobService.totalInit();
+        log.info("更新成功");
+        return Result.success("更新成功");
     }
 
     @Override

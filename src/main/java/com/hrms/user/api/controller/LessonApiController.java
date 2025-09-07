@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 public class LessonApiController implements LessonApi {
@@ -55,10 +57,18 @@ public class LessonApiController implements LessonApi {
     @Override
     public Result<PageBean> getById(PageFullDataDTO pageFullDataDTO) {
 
-        log.info("分页查询: {}", pageFullDataDTO);
+        log.info("模糊搜索: {}", pageFullDataDTO);
         PageBean pageBean = lessonService.getLessonById(pageFullDataDTO);
-        log.info("分页查询成功");
+        log.info("模糊搜索成功");
 
         return Result.success(pageBean);
+    }
+
+    @Override
+    public Result<List<Lesson>> getAll() {
+        log.info("查询所有课程");
+        List<Lesson> lessons = lessonService.getAllLesson();
+        log.info("查询所有课程成功");
+        return Result.success(lessons);
     }
 }

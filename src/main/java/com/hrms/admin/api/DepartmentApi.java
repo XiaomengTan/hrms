@@ -3,6 +3,7 @@ package com.hrms.admin.api;
 
 import com.hrms.domain.admin.dto.DepartmentDTO;
 import com.hrms.domain.admin.dto.DepartmentReviseDTO;
+import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.pojo.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
