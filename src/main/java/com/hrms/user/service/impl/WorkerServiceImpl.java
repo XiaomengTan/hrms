@@ -1,5 +1,6 @@
 package com.hrms.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,6 +13,7 @@ import com.hrms.domain.common.enums.Const;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.WorkerDTO;
 import com.hrms.domain.user.dto.WorkerReviseDTO;
+import com.hrms.domain.user.pojo.WorkerSimplified;
 import com.hrms.user.mapper.JobMapper;
 import com.hrms.user.mapper.WorkerMapper;
 import com.hrms.user.service.WorkerService;
@@ -21,10 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class WorkerServiceImpl extends ServiceImpl<WorkerMapper, Worker> implements WorkerService {
@@ -57,7 +56,7 @@ public class WorkerServiceImpl extends ServiceImpl<WorkerMapper, Worker> impleme
 
         //属性拷贝
         Worker worker = new Worker();
-        worker.setDepartureTime(Const.NOT_RESIGNED);
+        worker.setDepartureTime(Const.NOT_RESIGNED_DATA);
         BeanUtils.copyProperties(workerDTO, worker);
 
         //将员工添加到员工表
@@ -211,7 +210,7 @@ public class WorkerServiceImpl extends ServiceImpl<WorkerMapper, Worker> impleme
                 job.setTotalWorker(job.getTotalWorker() + 1);
                 jobMapper.updateById(job);
                 //设定离职时间为null，必须直接设置worker才能生效
-                workerReviseDTO.setDepartureTime(Const.NOT_RESIGNED);
+                workerReviseDTO.setDepartureTime(Const.NOT_RESIGNED_DATA);
             }
         }
         //属性拷贝
@@ -279,5 +278,23 @@ public class WorkerServiceImpl extends ServiceImpl<WorkerMapper, Worker> impleme
         workerPageBean.setTotal(workerIPage.getTotal());
         workerPageBean.setItems(workerIPage.getRecords());
         return workerPageBean;
+    }
+
+    /**
+     * 获取员工列表
+     *
+     * @return
+     */
+    @Override
+    public List<WorkerSimplified> getAllWorker() {
+        List<Worker> workers = workerMapper.selectList(new LambdaQueryWrapper<Worker>()
+                .select(Worker::getId, Worker::getName));
+        List<WorkerSimplified> workerSimplifiedList = new ArrayList<>();
+        for (Worker worker : workers) {
+            WorkerSimplified workerSimplified = new WorkerSimplified();
+            BeanUtils.copyProperties(worker, workerSimplified);
+            workerSimplifiedList.add(workerSimplified);
+        }
+        return workerSimplifiedList;
     }
 }

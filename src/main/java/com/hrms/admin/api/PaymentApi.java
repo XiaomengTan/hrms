@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public interface PaymentApi {
 
-    @Operation(summary = "定时任务测试")
-//    @PostMapping("/add")//仅用于测试
+    @Operation(summary = "定时添加收支账单")
     void addPaymentForm();
+
+    @PostMapping("/add")//仅用于测试
+    void addPaymentFormForTest();
 
     @Operation(summary = "有关键词时模糊匹配全列，没有关键词时直接分页搜索全部")
     @GetMapping("/getByPage")

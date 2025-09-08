@@ -7,6 +7,7 @@ import com.hrms.domain.common.entity.Worker;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.WorkerDTO;
 import com.hrms.domain.user.dto.WorkerReviseDTO;
+import com.hrms.domain.user.pojo.WorkerSimplified;
 
 import java.util.List;
 
@@ -57,4 +58,11 @@ public interface WorkerService extends IService<Worker> {
      * @return
      */
     PageBean getWorkerByJob(PageFullDataDTO pageFullDataDTO);
+
+    /**
+     * 获取员工列表
+     * @return
+     */
+    List<WorkerSimplified> getAllWorker();
+
 }

@@ -45,6 +45,10 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+logging:
+  level:
+    com.hrms.mapper: debug
+    org.apache.ibatis: debug
 #阿里云oss配置
 aliyun:
   oss:

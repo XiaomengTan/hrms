@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrms.user.mapper.SalaryMapper">
+    <select id="getSalaryById" resultType="com.hrms.domain.common.entity.Salary">
+        SELECT s.*
+        FROM salary s
+        <where>
+            <if test="id != null">
+                AND s.id LIKE CONCAT('%', #{id}, '%')
+            </if>
+            <if test="name != null and name != ''">
+                AND EXISTS (
+                SELECT 1
+                FROM worker w
+                WHERE w.id = s.worker_id
+                AND w.name LIKE CONCAT('%', #{name}, '%')
+                )
+            </if>
+        </where>
+        ORDER BY s.settlement_time DESC
+    </select>
+</mapper>
+

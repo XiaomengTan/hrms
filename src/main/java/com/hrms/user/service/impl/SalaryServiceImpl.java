@@ -1,6 +1,8 @@
 package com.hrms.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hrms.admin.mapper.PaymentMapper;
@@ -119,6 +121,14 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
         //获取需要修改的薪资单
         Salary reviseSalary = salaryMapper.selectById(salaryReviseDTO.getId());
         if (salaryOffset != null) {
+            //检查salaryOffset的值变大了还是小了，不变则不做额外操作
+//            if (salaryOffset > reviseSalary.getSalary()) {
+//
+//            } else if (salaryOffset < reviseSalary.getSalary()) {
+//
+//            }
+
+
             //重新计算总工资
             Integer jobId = reviseSalary.getJobId();
             Job job = jobMapper.selectById(jobId);
@@ -157,7 +167,8 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
     public PageBean getSalaryByPage(PageDataDTO pageDataDTO) {
         Page<Salary> salaryPage = new Page<>(pageDataDTO.getPageNum(), pageDataDTO.getPageSize());
 
-        IPage<Salary> salaryIPage = salaryMapper.selectPage(salaryPage, null);
+        IPage<Salary> salaryIPage = salaryMapper.selectPage(salaryPage, new LambdaQueryWrapper<Salary>()
+                .orderByDesc(Salary::getSettlementTime));
 
         PageBean<Salary> salaryPageBean = new PageBean<>();
         salaryPageBean.setTotal(salaryIPage.getTotal());

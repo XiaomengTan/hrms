@@ -33,6 +33,13 @@ public class PaymentApiController implements PaymentApi {
     }
 
     @Override
+    public void addPaymentFormForTest() {
+        log.info("正在添加今日账单...");
+        paymentService.addPaymentForm();
+        log.info("添加成功");
+    }
+
+    @Override
     public Result<PageBean> getPaymentByPage(PageFullDataDTO pageFullDataDTO) {
         log.info("分页查询或模糊搜索账单：{}", pageFullDataDTO);
         PageBean pageBean = paymentService.getPaymentByPage(pageFullDataDTO);

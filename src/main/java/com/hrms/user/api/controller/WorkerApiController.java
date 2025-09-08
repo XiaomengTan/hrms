@@ -8,6 +8,7 @@ import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
 import com.hrms.domain.user.dto.WorkerDTO;
 import com.hrms.domain.user.dto.WorkerReviseDTO;
+import com.hrms.domain.user.pojo.WorkerSimplified;
 import com.hrms.user.api.WorkerApi;
 import com.hrms.user.service.WorkerService;
 import lombok.extern.slf4j.Slf4j;
@@ -77,6 +78,14 @@ public class WorkerApiController implements WorkerApi {
         Worker byId = workerService.getById(id);
         log.info("查询成功");
         return Result.success(byId);
+    }
+
+    @Override
+    public Result<List<WorkerSimplified>> getAllWorkers() {
+        log.info("查询所有员工");
+        List<WorkerSimplified> workers = workerService.getAllWorker();
+        log.info("查询成功");
+        return Result.success(workers);
     }
 
     @Override

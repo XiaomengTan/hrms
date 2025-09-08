@@ -7,6 +7,7 @@ import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
 import com.hrms.domain.user.dto.WorkerDTO;
 import com.hrms.domain.user.dto.WorkerReviseDTO;
+import com.hrms.domain.user.pojo.WorkerSimplified;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -49,6 +50,10 @@ public interface WorkerApi {
     @Operation(summary = "根据id精确查询员工")
     @GetMapping("/getExact/{id}")
     Result<Worker> getWorkerExact(@PathVariable @NotNull Integer id);
+
+    @Operation(summary = "查询所有员工")
+    @GetMapping("/getAll")
+    Result<List<WorkerSimplified>> getAllWorkers();
 
     @Operation(summary = "根据岗位分页查询员工")
     @GetMapping("/getByJob")
