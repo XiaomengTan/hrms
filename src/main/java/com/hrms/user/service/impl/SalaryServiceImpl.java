@@ -2,7 +2,6 @@ package com.hrms.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hrms.admin.mapper.PaymentMapper;
@@ -12,11 +11,14 @@ import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Job;
 import com.hrms.domain.common.entity.Payment;
 import com.hrms.domain.common.entity.Salary;
+import com.hrms.domain.common.entity.Worker;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.SalaryDTO;
 import com.hrms.domain.user.dto.SalaryReviseDTO;
+import com.hrms.domain.user.vo.SalaryAddVO;
 import com.hrms.user.mapper.JobMapper;
 import com.hrms.user.mapper.SalaryMapper;
+import com.hrms.user.mapper.WorkerMapper;
 import com.hrms.user.service.SalaryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
 
     @Autowired
     private PaymentMapper paymentMapper;
+    @Autowired
+    private WorkerMapper workerMapper;
 
     /**
      * 添加薪资条
@@ -52,6 +56,14 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
         //判断job是否为null
         if (job == null) {
             throw new RuntimeException("工作不存在");
+        }
+        //检查目标日期中的薪资条是否存在
+        Salary salaryInDb = salaryMapper.selectOne(new LambdaQueryWrapper<Salary>()
+                .eq(Salary::getWorkerId, salaryDTO.getWorkerId())
+                .eq(Salary::getSettlementTime, salaryDTO.getSettlementTime()));
+        if (salaryInDb != null) {
+            //添加失败，今日已有薪资条
+            throw new RuntimeException("本日薪资条已存在");
         }
         Integer baseSalary = job.getSalary();
 
@@ -193,5 +205,24 @@ public class SalaryServiceImpl extends ServiceImpl<SalaryMapper, Salary> impleme
         salaryPageBean.setTotal(salaryIPage.getTotal());
         salaryPageBean.setItems(salaryIPage.getRecords());
         return salaryPageBean;
+    }
+
+    /**
+     * 查询被修改员工的薪资信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public SalaryAddVO getAddVO(Integer id) {
+        //查询员工信息
+        Worker worker = workerMapper.selectById(id);
+        //查询岗位信息
+        Job job = jobMapper.selectById(worker.getJob());
+        //创建视图对象
+        SalaryAddVO salaryAddVO = new SalaryAddVO();
+        salaryAddVO.setJobName(job.getName());
+        salaryAddVO.setBaseSalary(job.getSalary());
+        return salaryAddVO;
     }
 }

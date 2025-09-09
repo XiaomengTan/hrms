@@ -7,10 +7,10 @@ import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
 import com.hrms.domain.user.dto.SalaryDTO;
 import com.hrms.domain.user.dto.SalaryReviseDTO;
+import com.hrms.domain.user.vo.SalaryAddVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +22,10 @@ public interface SalaryApi {
     @Operation(summary = "添加薪资条")
     @PostMapping("/add")
     Result<Salary> addSalary(@RequestBody @Validated SalaryDTO salaryDTO);
+
+    @Operation(summary = "修改薪资条的数据回显")
+    @GetMapping("/getAddVO/{id}")
+    Result<SalaryAddVO> getAddVO(@PathVariable @NotNull Integer id);
 
     @Operation(summary = "删除薪资条")
     @DeleteMapping("/delete/{id}")

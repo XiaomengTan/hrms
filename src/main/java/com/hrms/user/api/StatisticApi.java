@@ -38,4 +38,6 @@ public interface StatisticApi {
     @Operation(summary = "获取员工薪资变化统计信息")
     @GetMapping("/getWorkerSalaryData/{id}")
     Result<List<SalaryVO>> getWorkerSalaryData(@PathVariable @NotNull Integer id);
+
+
 }

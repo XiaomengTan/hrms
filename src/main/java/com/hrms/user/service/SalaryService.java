@@ -8,6 +8,7 @@ import com.hrms.domain.common.entity.Salary;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.SalaryDTO;
 import com.hrms.domain.user.dto.SalaryReviseDTO;
+import com.hrms.domain.user.vo.SalaryAddVO;
 import com.hrms.user.mapper.SalaryMapper;
 
 public interface SalaryService extends IService<Salary> {
@@ -44,4 +45,11 @@ public interface SalaryService extends IService<Salary> {
      * @return
      */
     PageBean getSalaryById(PageFullDataDTO pageFullDataDTO);
+
+    /**
+     * 查询被修改员工的薪资信息
+     * @param id
+     * @return
+     */
+    SalaryAddVO getAddVO(Integer id);
 }

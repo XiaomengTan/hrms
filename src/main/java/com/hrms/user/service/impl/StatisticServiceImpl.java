@@ -204,8 +204,8 @@ public class StatisticServiceImpl implements StatisticService {
             double totalOutlay = payments.stream()
                     .mapToDouble(Payment::getOutlay)
                     .sum();
-            monthData.add(totalOutlay);
             monthData.add(totalProfit);
+            monthData.add(totalOutlay);
             incomeExpenseTrend.add(monthData);
         }
         return incomeExpenseTrend;

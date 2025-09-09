@@ -7,6 +7,7 @@ import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
 import com.hrms.domain.user.dto.SalaryDTO;
 import com.hrms.domain.user.dto.SalaryReviseDTO;
+import com.hrms.domain.user.vo.SalaryAddVO;
 import com.hrms.user.api.SalaryApi;
 import com.hrms.user.service.SalaryService;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,14 @@ public class SalaryApiController implements SalaryApi {
         salaryService.reviseSalary(salaryReviseDTO);
         log.info("修改薪资条成功");
         return Result.success("删除薪资条成功");
+    }
+
+    @Override
+    public Result<SalaryAddVO> getAddVO(Integer id) {
+        log.info("查询被添加薪资员工的薪资相关数据：{}", id);
+        SalaryAddVO salaryAddVO = salaryService.getAddVO(id);
+        log.info("查询成功");
+        return Result.success(salaryAddVO);
     }
 
     @Override
