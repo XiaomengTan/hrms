@@ -3,9 +3,7 @@ package com.hrms.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hrms.domain.admin.dto.DepartmentDTO;
 import com.hrms.domain.admin.dto.DepartmentReviseDTO;
-import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.entity.Department;
-import com.hrms.domain.common.pojo.PageBean;
 
 import java.util.List;
 

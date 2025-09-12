@@ -39,8 +39,10 @@ public class IndexApiController implements IndexApi {
             //检查是否为admin或者leader
             if ("admin".equals(username) || "leader".equals(username)) {
                 role = UserRoleEnum.ADMIN.getRole();
+//                role = "admin";
             } else {
                 role = UserRoleEnum.USER.getRole();
+//                role = "user";
             }
 
             //生成jwt

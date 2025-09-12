@@ -2,7 +2,6 @@ package com.hrms.user.api.controller;
 
 import com.hrms.admin.service.DepartmentService;
 import com.hrms.domain.common.entity.Department;
-import com.hrms.domain.common.entity.Salary;
 import com.hrms.domain.common.pojo.Result;
 import com.hrms.domain.user.vo.OverviewPageVO;
 import com.hrms.domain.user.vo.SalaryVO;

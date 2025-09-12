@@ -2,7 +2,6 @@ package com.hrms.admin.api.controller;
 
 import com.hrms.admin.api.LogApi;
 import com.hrms.admin.service.LogService;
-import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;

@@ -1,6 +1,5 @@
 package com.hrms.user.service;
 
-import com.hrms.domain.common.entity.Salary;
 import com.hrms.domain.user.vo.OverviewPageVO;
 import com.hrms.domain.user.vo.SalaryVO;
 import com.hrms.domain.user.vo.WorkerDataVO;

@@ -2,7 +2,6 @@ package com.hrms.user.api.controller;
 
 import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
-import com.hrms.domain.common.entity.Job;
 import com.hrms.domain.common.entity.Worker;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;

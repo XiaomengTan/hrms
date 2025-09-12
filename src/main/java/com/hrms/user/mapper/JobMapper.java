@@ -7,8 +7,6 @@ import com.hrms.domain.common.entity.Job;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import java.io.Serializable;
-
 @Mapper
 public interface JobMapper extends BaseMapper<Job> {
     @Select("select * from job where name = #{name}")

@@ -8,7 +8,6 @@ import com.hrms.domain.common.pojo.Result;
 import com.hrms.domain.user.dto.JobDTO;
 import com.hrms.domain.user.dto.JobReviseDTO;
 import io.swagger.v3.oas.annotations.Operation;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;

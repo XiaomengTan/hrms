@@ -1,11 +1,9 @@
 package com.hrms.domain.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 /**
  * User

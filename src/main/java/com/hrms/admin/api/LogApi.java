@@ -1,18 +1,14 @@
 package com.hrms.admin.api;
 
-import com.hrms.annotation.Log;
-import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.common.pojo.Result;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Tag(name = "系统日志管理", description = "系统日志管理")
 @RequestMapping("/admin/log")

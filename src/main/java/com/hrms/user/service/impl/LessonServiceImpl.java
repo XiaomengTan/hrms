@@ -8,12 +8,10 @@ import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Lesson;
 import com.hrms.domain.common.entity.Trainee;
-import com.hrms.domain.common.entity.Worker;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.LessonDTO;
 import com.hrms.domain.user.dto.LessonReviseDTO;
 import com.hrms.user.mapper.LessonMapper;
-
 import com.hrms.user.mapper.TraineeMapper;
 import com.hrms.user.service.LessonService;
 import org.springframework.beans.BeanUtils;
@@ -21,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

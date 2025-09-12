@@ -1,21 +1,16 @@
 package com.hrms.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hrms.admin.mapper.DepartmentMapper;
 import com.hrms.admin.service.DepartmentService;
 import com.hrms.annotation.Log;
 import com.hrms.domain.admin.dto.DepartmentDTO;
 import com.hrms.domain.admin.dto.DepartmentReviseDTO;
-import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.entity.Department;
 import com.hrms.domain.common.entity.Worker;
 import com.hrms.domain.common.enums.Const;
-import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.user.mapper.WorkerMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

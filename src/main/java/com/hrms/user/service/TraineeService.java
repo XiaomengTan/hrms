@@ -7,7 +7,6 @@ import com.hrms.domain.common.entity.Trainee;
 import com.hrms.domain.common.entity.Worker;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.domain.user.dto.TraineeDTO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

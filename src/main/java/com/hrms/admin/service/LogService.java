@@ -1,7 +1,6 @@
 package com.hrms.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hrms.domain.common.dto.PageDataDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Log;
 import com.hrms.domain.common.pojo.PageBean;

@@ -2,7 +2,6 @@ package com.hrms.admin.api.controller;
 
 import com.hrms.admin.api.PaymentApi;
 import com.hrms.admin.service.PaymentService;
-import com.hrms.annotation.Log;
 import com.hrms.domain.admin.dto.PaymentDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.pojo.PageBean;

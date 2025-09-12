@@ -10,7 +10,6 @@ import com.hrms.domain.user.dto.WorkerReviseDTO;
 import com.hrms.domain.user.pojo.WorkerSimplified;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;

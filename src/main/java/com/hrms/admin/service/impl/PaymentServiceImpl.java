@@ -1,6 +1,5 @@
 package com.hrms.admin.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,7 +9,6 @@ import com.hrms.annotation.Log;
 import com.hrms.domain.admin.dto.PaymentDTO;
 import com.hrms.domain.common.dto.PageFullDataDTO;
 import com.hrms.domain.common.entity.Payment;
-import com.hrms.domain.common.entity.Salary;
 import com.hrms.domain.common.pojo.PageBean;
 import com.hrms.user.mapper.SalaryMapper;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, Payment> implements PaymentService {
